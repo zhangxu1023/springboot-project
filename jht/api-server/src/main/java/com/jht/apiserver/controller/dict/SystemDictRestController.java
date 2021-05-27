@@ -6,6 +6,8 @@ import com.jht.admin.dict.biz.SystemDictBiz;
 import com.jht.admin.dict.entity.SystemDict;
 import com.jht.common.utils.R;
 import com.jht.common.web.MediaTypes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,11 +25,14 @@ public class SystemDictRestController {
     @Autowired
     private SystemDictBiz systemDictBiz;
 
+    private static final Logger logger = LoggerFactory.getLogger(SystemDictRestController.class);
+
     /**
      * 列表
      */
     @RequestMapping(value = "/list", method = {RequestMethod.POST}, consumes = {MediaTypes.JSON}, produces = MediaTypes.JSON_UTF_8)
     public R list(@RequestBody SystemDict systemDict){
+        logger.debug("=====>查询系统字典列表Controller测试日志debug级别打印<====");
         List<SystemDict> data = systemDictBiz.list(systemDict);
 
         return R.ok().put("list", data);
