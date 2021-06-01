@@ -34,9 +34,9 @@
     </appender>
 
     <!-- 日志输出级别 -->
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework" level="INFO"/>
     <logger name="com.jht" level="DEBUG"/>
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE"/>
     </root>
