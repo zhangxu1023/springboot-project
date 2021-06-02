@@ -4,6 +4,16 @@ spring:
     username: zhangxu  #用户名
     password: 1QAZ2wsx$  #密码
     driver-class-name: com.mysql.jdbc.Driver  #数据库链接驱动
+  redis:
+    host: 10.36.2.119
+    port: 6381
+    password: jhtredis2017
+    timeout: 10000
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        max-wait: 1000
 
 version: /v1
 
