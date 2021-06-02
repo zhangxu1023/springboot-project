@@ -32,7 +32,6 @@ public class SystemDictRestController {
      */
     @RequestMapping(value = "/list", method = {RequestMethod.POST}, consumes = {MediaTypes.JSON}, produces = MediaTypes.JSON_UTF_8)
     public R list(@RequestBody SystemDict systemDict){
-        logger.debug("=====>查询系统字典列表Controller测试日志debug级别打印<====");
         List<SystemDict> data = systemDictBiz.list(systemDict);
 
         return R.ok().put("list", data);

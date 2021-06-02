@@ -22,7 +22,6 @@ public class SystemDictBizImpl implements SystemDictBiz {
 
     @Override
     public List<SystemDict> list(SystemDict systemDict) {
-        logger.debug("=====>查询系统字典列表biz测试日志debug级别打印<====");
         QueryWrapper<SystemDict> queryWrapper=  new QueryWrapper<>();
         if (systemDict != null){
             if (systemDict.getDictId() != null){
