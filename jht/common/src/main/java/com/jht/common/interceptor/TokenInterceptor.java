@@ -1,5 +1,9 @@
 package com.jht.common.interceptor;
 
+import com.jht.common.constant.BaseConstant;
+import com.jht.common.redis.RedisUtil;
+import com.jht.common.web.HttpStatusEnum;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -14,23 +18,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TokenInterceptor implements HandlerInterceptor{
 
-//    @Autowired
-//    private RedisUtil redisUtil;
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
         String token = request.getHeader("Authorization");
 
-//        if (redisUtil.verifyTokenRedis(token, request)) {
-//            return true;
-//        } else {
-//            JsonResponse.jsonWrite(response, Integer.toString(HttpStatusEnum.UNAUTHORIZED.value()),
-//                    BaseConstant.MESSAGE_ERROR_TOKEN_MISSING);
-//            return false;
-//        }
-
-        return true;
+        if (redisUtil.verifyTokenRedis(token, request)) {
+            return true;
+        } else {
+            JsonResponse.jsonWrite(response, Integer.toString(HttpStatusEnum.UNAUTHORIZED.value()),
+                    BaseConstant.MESSAGE_ERROR_TOKEN_MISSING);
+            return false;
+        }
     }
 
     @Override

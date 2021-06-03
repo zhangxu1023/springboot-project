@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import com.jht.common.constant.BaseConstant;
+import com.jht.common.redis.RedisUtil;
 import com.jht.common.web.HttpStatusEnum;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,8 +27,8 @@ import java.util.Objects;
 @Slf4j
 public class LogInterceptor implements HandlerInterceptor {
 
-//	@Autowired
-//	private RedisUtil redisUtil;
+	@Autowired
+	private RedisUtil redisUtil;
 
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -64,29 +65,29 @@ public class LogInterceptor implements HandlerInterceptor {
 		// 初始化验证token参数，因为下方有两处地方有可能会调用验证token方法，由于两处各自独立，为了避免重复调用，设置该参数
 		Boolean verifyTokenRedis = null;
 		// 判断如果请求是51有色网站，校验token是否失效，如果失效，将返回response的head头中isExpire置为true（网站V3.3）
-//		if (Objects.equals(deviceFlag, BaseConstant.DEVICE_FLAG_51WEB)) {
-//			String token = request.getHeader("Authorization");
-//			if (StringUtils.isNotBlank(token)) {
-//				verifyTokenRedis = redisUtil.verifyTokenRedis(token, request);
-//				if (!verifyTokenRedis) {
-//					response.setHeader("isExpire", "true");
-//				}
-//			}
-//		}
-//
-//		if (Objects.equals(flag, "true")) {
-//			String token = request.getHeader("Authorization");
-//			if (verifyTokenRedis == null) {
-//				verifyTokenRedis = redisUtil.verifyTokenRedis(token, request);
-//			}
-//			if (verifyTokenRedis) {
-//				return true;
-//			} else {
-//				JsonResponse.jsonWrite(response, Integer.toString(HttpStatusEnum.UNAUTHORIZED.value()),
-//						BaseConstant.MESSAGE_ERROR_TOKEN_MISSING);
-//				return false;
-//			}
-//		}
+		if (Objects.equals(deviceFlag, BaseConstant.DEVICE_FLAG_51WEB)) {
+			String token = request.getHeader("Authorization");
+			if (StringUtils.isNotBlank(token)) {
+				verifyTokenRedis = redisUtil.verifyTokenRedis(token, request);
+				if (!verifyTokenRedis) {
+					response.setHeader("isExpire", "true");
+				}
+			}
+		}
+
+		if (Objects.equals(flag, "true")) {
+			String token = request.getHeader("Authorization");
+			if (verifyTokenRedis == null) {
+				verifyTokenRedis = redisUtil.verifyTokenRedis(token, request);
+			}
+			if (verifyTokenRedis) {
+				return true;
+			} else {
+				JsonResponse.jsonWrite(response, Integer.toString(HttpStatusEnum.UNAUTHORIZED.value()),
+						BaseConstant.MESSAGE_ERROR_TOKEN_MISSING);
+				return false;
+			}
+		}
 		return true;
 	}
 
