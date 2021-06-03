@@ -19,7 +19,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-    <groupId>com.jht</groupId>
+
     <artifactId>admin</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>

@@ -21,6 +21,6 @@ mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*Dao.xml
 
 logging:
-   config: F:/workspace-springboot/jht/api-server/src/main/resources/logback.xml
+   config: classpath:logback.xml
    level:
      com.hjt: debug

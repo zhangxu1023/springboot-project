@@ -26,7 +26,6 @@
         </dependencies>
     </dependencyManagement>
 
-    <groupId>com.jht</groupId>
     <artifactId>api-server</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
@@ -69,6 +68,14 @@
                 <version>3.3.1</version>
                 <configuration>
                     <warName>api</warName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
                 </configuration>
             </plugin>
         </plugins>
