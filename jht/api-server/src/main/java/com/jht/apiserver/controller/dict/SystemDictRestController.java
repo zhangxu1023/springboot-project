@@ -3,7 +3,9 @@ package com.jht.apiserver.controller.dict;
 import java.util.List;
 
 import com.jht.admin.dict.biz.SystemDictBiz;
+import com.jht.admin.dict.dto.SystemDictInDTO;
 import com.jht.admin.dict.entity.SystemDict;
+import com.jht.common.utils.PageUtils;
 import com.jht.common.utils.R;
 import com.jht.common.web.MediaTypes;
 import org.slf4j.Logger;
@@ -35,6 +37,16 @@ public class SystemDictRestController {
         List<SystemDict> data = systemDictBiz.list(systemDict);
 
         return R.ok().put("list", data);
+    }
+
+    /**
+     * 分页列表
+     */
+    @RequestMapping(value = "/pagelist", method = {RequestMethod.POST}, consumes = {MediaTypes.JSON}, produces = MediaTypes.JSON_UTF_8)
+    public R pageList(@RequestBody SystemDictInDTO inDTO){
+        PageUtils page = systemDictBiz.pageList(inDTO);
+
+        return R.ok().put("page", page);
     }
 
 

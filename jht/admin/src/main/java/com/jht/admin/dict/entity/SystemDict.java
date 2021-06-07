@@ -1,6 +1,7 @@
 package com.jht.admin.dict.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
@@ -45,10 +46,6 @@ public class SystemDict implements Serializable {
 	 */
 	private Integer dictSort;
 	/**
-	 * 是否删除
-	 */
-	private Integer isDelete;
-	/**
 	 * 创建时间
 	 */
 	private Date createTime;
@@ -56,5 +53,10 @@ public class SystemDict implements Serializable {
 	 * 修改时间
 	 */
 	private Date modifyTime;
+	/**
+	 * 是否删除
+	 */
+	@TableLogic
+	private Boolean isDelete;
 
 }

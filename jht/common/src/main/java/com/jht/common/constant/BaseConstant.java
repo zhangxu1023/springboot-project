@@ -1027,4 +1027,9 @@ public class BaseConstant {
      * 添加开票申请的场合，开票申请编号的命名规则
      */
     public final static String INVOICE_APPLICATION_FLAG = "IN";
+
+    /**
+     * 字符串"null"
+     */
+    public final static String STR_NULL = "null";
 }

@@ -15,6 +15,20 @@ import java.util.Map;
  */
 public interface SystemDictService extends IService<SystemDict> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    /**
+     * 字典表页面显示替换
+     * @param dictId
+     * @return dictLabel
+     */
+    String getDictLabel(String dictId);
+
+    /**
+     * 字典表页面显示替换
+     * @param systemDict
+     * @param currPage
+     * @param pageSize
+     * @return pageList
+     */
+    PageUtils pageList(SystemDict systemDict, int currPage, int pageSize);
 }
 

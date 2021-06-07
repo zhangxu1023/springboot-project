@@ -1,8 +1,11 @@
 package com.jht.admin.dict.biz;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jht.admin.dict.dto.SystemDictInDTO;
 import com.jht.admin.dict.entity.SystemDict;
 import com.jht.admin.dict.service.SystemDictService;
+import com.jht.common.mapper.BeanMapper;
+import com.jht.common.utils.PageUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +36,11 @@ public class SystemDictBizImpl implements SystemDictBiz {
         }
         queryWrapper.orderByAsc("dict_sort");
         return systemDictService.list(queryWrapper);
+    }
+
+    @Override
+    public PageUtils pageList(SystemDictInDTO inDTO) {
+        SystemDict dict = BeanMapper.map(inDTO, SystemDict.class);
+        return systemDictService.pageList(dict, inDTO.getCurrPage(), inDTO.getPageSize());
     }
 }

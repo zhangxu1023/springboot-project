@@ -17,7 +17,7 @@
     <properties>
         <java.version>1.8</java.version>
         <jht.version>${project.version}</jht.version>
-        <mybatisplus.version>3.3.1</mybatisplus.version>
+        <mybatisplus.version>3.4.3</mybatisplus.version>
         <httpcore.version>4.4.13</httpcore.version>
         <lombok.version>1.18.20</lombok.version>
         <fastjson.version>1.2.74</fastjson.version>
@@ -44,11 +44,6 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatisplus.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
             <version>${mybatisplus.version}</version>
         </dependency>
         <dependency>

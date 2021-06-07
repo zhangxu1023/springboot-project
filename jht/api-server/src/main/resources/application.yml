@@ -19,6 +19,11 @@ version: /v1
 
 mybatis-plus:
   mapper-locations: classpath*:mybatis/**/*Dao.xml
+  global-config:
+    db-config:
+      logic-delete-field: is_delete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
 
 logging:
    config: classpath:logback.xml
