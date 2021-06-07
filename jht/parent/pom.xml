@@ -27,10 +27,9 @@
         <fastjson.version>1.2.12</fastjson.version>
         <redis.version>2.5.0</redis.version>
         <jedis.version>3.6.0</jedis.version>
+        <janino.version>3.0.6</janino.version>
     </properties>
     <dependencies>
-
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -98,6 +97,12 @@
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
             <version>${jwt.version}</version>
+        </dependency>
+        <!--Log输出路径用-->
+        <dependency>
+            <groupId>org.codehaus.janino</groupId>
+            <artifactId>janino</artifactId>
+            <version>${janino.version}</version>
         </dependency>
     </dependencies>
 
