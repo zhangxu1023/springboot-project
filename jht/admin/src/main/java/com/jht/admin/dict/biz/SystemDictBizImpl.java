@@ -2,8 +2,11 @@ package com.jht.admin.dict.biz;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jht.admin.dict.dto.SystemDictInDTO;
+import com.jht.admin.dict.dto.SystemDictOutDTO;
 import com.jht.admin.dict.entity.SystemDict;
 import com.jht.admin.dict.service.SystemDictService;
+import com.jht.common.biz.BaseBiz;
+import com.jht.common.constant.BaseConstant;
 import com.jht.common.mapper.BeanMapper;
 import com.jht.common.utils.PageUtils;
 import org.slf4j.Logger;
@@ -17,7 +20,7 @@ import java.util.List;
  * @author admin
  */
 @Component
-public class SystemDictBizImpl implements SystemDictBiz {
+public class SystemDictBizImpl extends BaseBiz implements SystemDictBiz {
     @Autowired
     private SystemDictService systemDictService;
 
@@ -41,6 +44,10 @@ public class SystemDictBizImpl implements SystemDictBiz {
     @Override
     public PageUtils pageList(SystemDictInDTO inDTO) {
         SystemDict dict = BeanMapper.map(inDTO, SystemDict.class);
-        return systemDictService.pageList(dict, inDTO.getCurrPage(), inDTO.getPageSize());
+        PageUtils page = systemDictService.pageList(dict, inDTO.getCurrPage(), inDTO.getPageSize());
+        List<SystemDict> list = (List<SystemDict>) page.getList();
+        List<SystemDictOutDTO> resultList = transform(list, BaseConstant.SYSTEMDICTOUTDTO);
+        page.setList(resultList);
+        return page;
     }
 }

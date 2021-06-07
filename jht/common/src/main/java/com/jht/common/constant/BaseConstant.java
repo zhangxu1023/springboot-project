@@ -1032,4 +1032,6 @@ public class BaseConstant {
      * 字符串"null"
      */
     public final static String STR_NULL = "null";
+
+    public final static String SYSTEMDICTOUTDTO = "com.jht.admin.dict.dto.SystemDictOutDTO";
 }
