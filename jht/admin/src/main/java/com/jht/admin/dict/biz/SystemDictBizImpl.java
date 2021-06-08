@@ -7,8 +7,11 @@ import com.jht.admin.dict.entity.SystemDict;
 import com.jht.admin.dict.service.SystemDictService;
 import com.jht.common.biz.BaseBiz;
 import com.jht.common.constant.BaseConstant;
+import com.jht.common.exception.RRException;
 import com.jht.common.mapper.BeanMapper;
 import com.jht.common.utils.PageUtils;
+import com.jht.common.web.HttpStatusEnum;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +36,7 @@ public class SystemDictBizImpl extends BaseBiz implements SystemDictBiz {
             if (systemDict.getDictId() != null){
                 queryWrapper.eq("dict_id",systemDict.getDictId());
             }
-            if (systemDict.getDictType() != null){
+            if (StringUtils.isNotBlank(systemDict.getDictType())){
                 queryWrapper.eq("dict_type",systemDict.getDictType());
             }
         }
@@ -49,5 +52,22 @@ public class SystemDictBizImpl extends BaseBiz implements SystemDictBiz {
         List<SystemDictOutDTO> resultList = transform(list, BaseConstant.SYSTEMDICTOUTDTO);
         page.setList(resultList);
         return page;
+    }
+
+    @Override
+    public SystemDictOutDTO add(SystemDictInDTO inDTO) {
+        SystemDictOutDTO outDTO = new SystemDictOutDTO();
+        SystemDict dict = BeanMapper.map(inDTO, SystemDict.class);
+        boolean result = systemDictService.save(dict);
+        if(! result) {
+            throw new RRException(HttpStatusEnum.INSERT_FAILURE.getEnMessage(),HttpStatusEnum.INSERT_FAILURE.value());
+        }
+        // 查询新增的记录
+        QueryWrapper<SystemDict> queryWrapper=  new QueryWrapper<>();
+        queryWrapper.eq("dict_value", dict.getDictValue());
+        queryWrapper.orderByDesc("create_time");
+        List<SystemDict> list = systemDictService.list(queryWrapper);
+        outDTO.setDictId(String.valueOf(list.get(0).getDictId()));
+        return outDTO;
     }
 }

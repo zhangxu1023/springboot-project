@@ -1,8 +1,6 @@
 package com.jht.admin.dict.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -23,7 +21,7 @@ public class SystemDict implements Serializable {
 	/**
 	 * 主键
 	 */
-	@TableId
+	@TableId(value="dict_id", type = IdType.AUTO)
 	private Long dictId;
 	/**
 	 * 值
@@ -48,15 +46,18 @@ public class SystemDict implements Serializable {
 	/**
 	 * 创建时间
 	 */
+	@TableField(value="create_time", fill = FieldFill.INSERT)
 	private Date createTime;
 	/**
 	 * 修改时间
 	 */
+	@TableField(value="modify_time", fill = FieldFill.INSERT_UPDATE)
 	private Date modifyTime;
 	/**
 	 * 是否删除
 	 */
 	@TableLogic
+	@TableField(value="is_delete", fill = FieldFill.INSERT)
 	private Boolean isDelete;
 
 }

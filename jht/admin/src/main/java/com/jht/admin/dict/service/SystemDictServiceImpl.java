@@ -63,10 +63,10 @@ public class SystemDictServiceImpl extends ServiceImpl<SystemDictDao, SystemDict
             if (systemDict.getDictId() != null){
                 queryWrapper.eq("dict_id",systemDict.getDictId());
             }
-            if (systemDict.getDictType() != null){
+            if (StringUtils.isNotBlank(systemDict.getDictType())){
                 queryWrapper.eq("dict_type",systemDict.getDictType());
             }
-            if (systemDict.getDescription() != null){
+            if (StringUtils.isNotBlank(systemDict.getDescription())){
                 queryWrapper.like("description",systemDict.getDescription());
             }
         }

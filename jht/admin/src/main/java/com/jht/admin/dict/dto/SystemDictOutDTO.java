@@ -17,7 +17,7 @@ public class SystemDictOutDTO {
     /**
      * 主键
      */
-    private Long dictId;
+    private String dictId;
     /**
      * 值
      */
