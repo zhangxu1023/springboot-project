@@ -23,7 +23,7 @@ public interface SystemDictService extends IService<SystemDict> {
     String getDictLabel(String dictId);
 
     /**
-     * 字典表页面显示替换
+     * 字典表分页检索
      * @param systemDict
      * @param currPage
      * @param pageSize
