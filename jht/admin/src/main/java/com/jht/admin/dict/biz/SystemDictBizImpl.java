@@ -1,6 +1,7 @@
 package com.jht.admin.dict.biz;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.jht.admin.dict.dto.SystemDictInDTO;
 import com.jht.admin.dict.dto.SystemDictOutDTO;
 import com.jht.admin.dict.entity.SystemDict;
@@ -68,6 +69,28 @@ public class SystemDictBizImpl extends BaseBiz implements SystemDictBiz {
         queryWrapper.orderByDesc("create_time");
         List<SystemDict> list = systemDictService.list(queryWrapper);
         outDTO.setDictId(String.valueOf(list.get(0).getDictId()));
+        return outDTO;
+    }
+
+    @Override
+    public SystemDictOutDTO update(SystemDictInDTO inDTO) {
+        SystemDictOutDTO outDTO = new SystemDictOutDTO();
+        SystemDict dict = BeanMapper.map(inDTO, SystemDict.class);
+        UpdateWrapper<SystemDict> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("dict_id", dict.getDictId());
+        boolean result = systemDictService.update(dict, updateWrapper);
+        if(! result) {
+            throw new RRException(HttpStatusEnum.UPDATE_FAILURE.getEnMessage(),HttpStatusEnum.UPDATE_FAILURE.value());
+        }
+        // 查询更新后的记录
+        QueryWrapper<SystemDict> queryWrapper=  new QueryWrapper<>();
+        queryWrapper.eq("dict_id", dict.getDictId());
+        queryWrapper.orderByDesc("create_time");
+        List<SystemDict> list = systemDictService.list(queryWrapper);
+        if(!list.isEmpty()) {
+            outDTO = BeanMapper.map(list.get(0), SystemDictOutDTO.class);
+        }
+
         return outDTO;
     }
 }

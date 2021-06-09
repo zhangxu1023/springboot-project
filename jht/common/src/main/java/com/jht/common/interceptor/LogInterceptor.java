@@ -23,7 +23,6 @@ import java.util.Objects;
  * @author Alvis
  * @date 2017年11月27日 下午4:39:17
  */
-/* @Component */
 @Slf4j
 public class LogInterceptor implements HandlerInterceptor {
 

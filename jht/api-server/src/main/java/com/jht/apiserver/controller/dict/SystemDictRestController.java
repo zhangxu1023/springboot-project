@@ -81,6 +81,33 @@ public class SystemDictRestController {
         return R.ok().put("dictId", outDTO.getDictId());
     }
 
+    /**
+     * 新增记录
+     */
+    @RequestMapping(value = "/update", method = {RequestMethod.POST}, consumes = {MediaTypes.JSON}, produces =
+            MediaTypes.JSON_UTF_8)
+    public R update(@RequestBody SystemDictInDTO inDTO, HttpServletRequest request){
+        Object id = request.getAttribute(BaseConstant.LOGINPERSONID);
+        SystemDictOutDTO outDTO = new SystemDictOutDTO();
+        try {
+            if(id == null) {
+                logger.info("没有Token");
+                return R.error(HttpStatusEnum.INTERNAL_SERVER_ERROR.value(),
+                        HttpStatusEnum.INTERNAL_SERVER_ERROR.getCnMessage());
+            }
+            outDTO = systemDictBiz.update(inDTO);
+        } catch (RRException e) {
+            logger.error("更新系统字典表异常信息为:", e);
+            return R.error(e.getCode(), e.getMsg());
+        } catch (Exception e) {
+            logger.error("更新系统字典表异常信息为:", e);
+            return R.error(HttpStatusEnum.INTERNAL_SERVER_ERROR.value(),
+                    HttpStatusEnum.INTERNAL_SERVER_ERROR.getEnMessage());
+        }
+
+        return R.ok().put("data", outDTO);
+    }
+
 
 
 
